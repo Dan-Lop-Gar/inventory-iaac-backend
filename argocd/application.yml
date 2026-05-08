@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: inventory-backend
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/Dan-Lop-Gar/inventory-iaac-backend
+    targetRevision: HEAD
+    path: overlays/dev           # cambia a overlays/prod para producción
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: inventory-mgmt
+
+  syncPolicy:
+    automated:
+      prune: true                # elimina recursos que ya no están en Git
+      selfHeal: true             # revierte cambios manuales en el cluster
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true

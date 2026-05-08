@@ -1,0 +1,45 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: inventory-mgmt
+
+resources:
+  - namespace.yml
+
+  # Vault connection
+  - vault/vault-auth-token.yml
+  - vault/secret-store.yml
+
+  # Postgres
+  - postgres/service-account.yml
+  - postgres/external-secret.yml    # ← reemplaza secret.yml
+  - postgres/pvc.yml
+  - postgres/deployment.yml
+  - postgres/service.yml
+
+  # Kafka
+  - kafka/zookeeper-deployment.yml
+  - kafka/zookeeper-service.yml
+  - kafka/kafka-deployment.yml
+  - kafka/kafka-service.yml
+
+  # Keycloak
+  - keycloak/service-account.yml
+  - keycloak/external-secret.yml    # ← reemplaza env hardcodeados
+  - keycloak/deployment.yml
+  - keycloak/service.yml
+
+  # Hazelcast
+  - hazelcast/deployment.yml
+  - hazelcast/service.yml
+
+  # Envoy
+  - envoy/deployment.yml
+  - envoy/service.yml
+
+  # Backend
+  - backend/service-account.yml
+  - backend/external-secret.yml     # ← reemplaza secret.yml
+  - backend/configmap.yml
+  - backend/deployment.yml
+  - backend/service.yml
