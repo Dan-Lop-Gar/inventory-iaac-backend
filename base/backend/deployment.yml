@@ -21,7 +21,7 @@ spec:
       serviceAccountName: backend-sa
       containers:
         - name: backend
-          image: danst21/inventory-backend:latest
+          image: danst21/inventory-backend:3946a929aedeae4dc30b23be7576fb05be0b897d
           ports:
             - containerPort: 8080
               name: http
