@@ -15,7 +15,7 @@ spec:
     spec:
       initContainers:
         - name: copy-files
-          image: danst21/inventory-backend:latest
+          image: danst21/inventory-backend:704f193c7b7481c1ea9ae778b6b894122f13abd5
           imagePullPolicy: IfNotPresent
           command: ['/bin/sh', '-c', 'cp /app/proto.pb /proto-volume/proto.pb && cp /app/envoy.yaml /envoy-config-volume/envoy.yaml']
           volumeMounts:
